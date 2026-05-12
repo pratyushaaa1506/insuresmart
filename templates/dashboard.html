@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InsureSmart AI Dashboard</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, sans-serif;
+            background:#f1f5f9;
+            overflow-x:hidden;
+            transition:0.3s;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width:260px;
+            height:100vh;
+            position:fixed;
+            left:0;
+            top:0;
+            background:linear-gradient(180deg,#0f172a,#1e3a8a);
+            color:white;
+            padding:30px 20px;
+
+        }
+
+        .logo{
+            font-size:32px;
+            font-weight:bold;
+            margin-bottom:50px;
+        }
+
+        .menu-item{
+
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:15px;
+            cursor:pointer;
+            transition:0.3s;
+            font-size:18px;
+
+        }
+
+        .menu-item:hover{
+            background:rgba(255,255,255,0.15);
+        }
+
+        .menu-item i{
+            margin-right:12px;
+        }
+
+        /* MAIN CONTENT */
+
+        .main{
+            margin-left:260px;
+            padding:30px;
+        }
+
+        /* TOPBAR */
+
+        .topbar{
+
+            background:white;
+            border-radius:20px;
+            padding:20px 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0px 5px 20px rgba(0,0,0,0.08);
+            margin-bottom:30px;
+
+        }
+
+        .welcome h2{
+            font-size:32px;
+            font-weight:bold;
+        }
+
+        .welcome p{
+            color:gray;
+            margin-top:5px;
+        }
+
+        .top-buttons button,
+        .top-buttons a{
+
+            border:none;
+            padding:12px 20px;
+            border-radius:12px;
+            font-weight:bold;
+            text-decoration:none;
+            margin-left:10px;
+
+        }
+
+        .mode-btn{
+            background:#111827;
+            color:white;
+        }
+
+        .logout-btn{
+            background:#ef4444;
+            color:white;
+        }
+
+        /* STATS */
+
+        .stats-row{
+            margin-bottom:30px;
+        }
+
+        .stat-card{
+
+            background:white;
+            border-radius:20px;
+            padding:25px;
+            box-shadow:0px 5px 20px rgba(0,0,0,0.08);
+            transition:0.3s;
+
+        }
+
+        .stat-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .stat-card h3{
+            font-size:40px;
+            font-weight:bold;
+            color:#2563eb;
+        }
+
+        .stat-card p{
+            color:gray;
+            margin-top:10px;
+        }
+
+        /* FORM SECTION */
+
+        .form-card{
+
+            background:white;
+            border-radius:25px;
+            padding:40px;
+            box-shadow:0px 5px 20px rgba(0,0,0,0.08);
+
+        }
+
+        .form-title{
+            font-size:38px;
+            font-weight:bold;
+            margin-bottom:30px;
+        }
+
+        .form-control,
+        .form-select{
+
+            height:55px;
+            border-radius:15px;
+            border:1px solid #d1d5db;
+            margin-top:8px;
+
+        }
+
+        label{
+            font-weight:bold;
+            margin-top:10px;
+        }
+
+        .predict-btn{
+
+            width:100%;
+            height:60px;
+            border:none;
+            border-radius:15px;
+            background:linear-gradient(135deg,#2563eb,#06b6d4);
+            color:white;
+            font-size:20px;
+            font-weight:bold;
+            margin-top:20px;
+            transition:0.3s;
+
+        }
+
+        .predict-btn:hover{
+            transform:scale(1.01);
+        }
+
+        /* DARK MODE */
+
+        .dark-mode{
+            background:#020617;
+            color:white;
+        }
+
+        .dark-mode .topbar,
+        .dark-mode .stat-card,
+        .dark-mode .form-card{
+
+            background:#111827;
+            color:white;
+
+        }
+
+        .dark-mode .form-control,
+        .dark-mode .form-select{
+
+            background:#1f2937;
+            color:white;
+            border:none;
+
+        }
+
+        .dark-mode p{
+            color:#cbd5e1;
+        }
+
+        @media(max-width:1000px){
+
+            .sidebar{
+                width:100%;
+                height:auto;
+                position:relative;
+            }
+
+            .main{
+                margin-left:0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body id="body">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        InsureSmart AI
+    </div>
+
+    <a href="/dashboard"
+       class="menu-item text-decoration-none text-white d-block">
+
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+
+    </a>
+
+    <a href="/plans"
+       class="menu-item text-decoration-none text-white d-block">
+
+        <i class="fa-solid fa-shield-heart"></i>
+        Insurance Plans
+
+    </a>
+
+    <a href="/analytics"
+       class="menu-item text-decoration-none text-white d-block">
+
+        <i class="fa-solid fa-chart-line"></i>
+        Analytics
+
+    </a>
+
+    <a href="/profile"
+       class="menu-item text-decoration-none text-white d-block">
+
+        <i class="fa-solid fa-user"></i>
+        Profile
+
+    </a>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div class="welcome">
+
+            <h2>Welcome Back 👋</h2>
+
+            <p>
+                Predict and compare the best Indian insurance plans.
+            </p>
+
+        </div>
+
+        <div class="top-buttons">
+
+            <button
+                class="mode-btn"
+                onclick="toggleMode()">
+
+                Dark / Light
+
+            </button>
+
+            <a href="/logout" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="row stats-row">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="stat-card">
+
+                <h3>50+</h3>
+
+                <p>
+                    Insurance Providers
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="stat-card">
+
+                <h3>₹5L+</h3>
+
+                <p>
+                    Maximum Coverage
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="stat-card">
+
+                <h3>24/7</h3>
+
+                <p>
+                    AI Recommendations
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="form-card">
+
+        <div class="form-title">
+            Health Insurance Prediction
+        </div>
+
+        <form action="/predict" method="POST">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                    <label>Age</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="age"
+                        required>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label>Height (cm)</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="height"
+                        required>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                    <label>Weight (kg)</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="weight"
+                        required>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label>Children</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="children"
+                        required>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                    <label>Existing Disease</label>
+
+                    <select class="form-select" name="disease">
+
+    <option value="0">None</option>
+
+    <option value="1">Diabetes</option>
+
+    <option value="2">High Blood Pressure (Hypertension)</option>
+
+    <option value="3">Heart Disease</option>
+
+    <option value="4">Asthma</option>
+
+    <option value="5">Thyroid Disorder</option>
+
+    <option value="6">Obesity</option>
+
+    <option value="7">High Cholesterol</option>
+
+    <option value="8">Arthritis</option>
+
+    <option value="9">Kidney Disease</option>
+
+    <option value="10">Liver Disease</option>
+
+    <option value="11">Cancer History</option>
+
+    <option value="12">Depression / Anxiety</option>
+
+    <option value="13">PCOS / PCOD</option>
+
+    <option value="14">Tuberculosis (TB)</option>
+
+    <option value="15">Chronic Lung Disease</option>
+
+</select>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label>State</label>
+
+                    <select class="form-select" name="state">
+
+    <option value="0">Andhra Pradesh</option>
+    <option value="1">Arunachal Pradesh</option>
+    <option value="2">Assam</option>
+    <option value="3">Bihar</option>
+    <option value="4">Chhattisgarh</option>
+    <option value="5">Goa</option>
+    <option value="6">Gujarat</option>
+    <option value="7">Haryana</option>
+    <option value="8">Himachal Pradesh</option>
+    <option value="9">Jharkhand</option>
+    <option value="10">Karnataka</option>
+    <option value="11">Kerala</option>
+    <option value="12">Madhya Pradesh</option>
+    <option value="13">Maharashtra</option>
+    <option value="14">Manipur</option>
+    <option value="15">Meghalaya</option>
+    <option value="16">Mizoram</option>
+    <option value="17">Nagaland</option>
+    <option value="18">Odisha</option>
+    <option value="19">Punjab</option>
+    <option value="20">Rajasthan</option>
+    <option value="21">Sikkim</option>
+    <option value="22">Tamil Nadu</option>
+    <option value="23">Telangana</option>
+    <option value="24">Tripura</option>
+    <option value="25">Uttar Pradesh</option>
+    <option value="26">Uttarakhand</option>
+    <option value="27">West Bengal</option>
+
+    <!-- UNION TERRITORIES -->
+
+    <option value="28">Andaman and Nicobar Islands</option>
+    <option value="29">Chandigarh</option>
+    <option value="30">Dadra and Nagar Haveli and Daman and Diu</option>
+    <option value="31">Delhi</option>
+    <option value="32">Jammu and Kashmir</option>
+    <option value="33">Ladakh</option>
+    <option value="34">Lakshadweep</option>
+    <option value="35">Puducherry</option>
+
+</select>
+
+                </div>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label>Coverage Amount</label>
+
+                <select class="form-select" name="coverage">
+
+                    <option>₹5 Lakhs</option>
+                    <option>₹10 Lakhs</option>
+                    <option>₹25 Lakhs</option>
+
+                </select>
+
+            </div>
+
+            <button class="predict-btn">
+                Predict Insurance Cost
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function toggleMode(){
+
+    document
+        .getElementById("body")
+        .classList
+        .toggle("dark-mode");
+
+}
+
+</script>
+
+</body>
+</html>

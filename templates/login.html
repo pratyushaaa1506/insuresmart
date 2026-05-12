@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - InsureSmart AI</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body{
+            margin:0;
+            padding:0;
+            height:100vh;
+            background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:Arial, sans-serif;
+        }
+
+        .login-box{
+
+            width:900px;
+            height:550px;
+            background:white;
+            border-radius:25px;
+            overflow:hidden;
+            display:flex;
+            box-shadow:0px 10px 30px rgba(0,0,0,0.3);
+
+        }
+
+        .left{
+
+            flex:1;
+            background: linear-gradient(135deg,#2563eb,#06b6d4);
+            color:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
+
+        }
+
+        .left h1{
+            font-size:50px;
+            font-weight:bold;
+        }
+
+        .left p{
+            margin-top:20px;
+            font-size:18px;
+            text-align:center;
+        }
+
+        .right{
+
+            flex:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
+
+        }
+
+        .form-box{
+            width:100%;
+            max-width:350px;
+        }
+
+        .form-control{
+            height:50px;
+            border-radius:12px;
+        }
+
+        .btn-login{
+
+            background:#2563eb;
+            color:white;
+            height:50px;
+            border:none;
+            border-radius:12px;
+            font-weight:bold;
+            width:100%;
+
+        }
+
+        .btn-login:hover{
+            background:#1d4ed8;
+        }
+
+        .register-link{
+            margin-top:15px;
+            text-align:center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="left">
+
+        <h1>InsureSmart AI</h1>
+
+        <p>
+            AI-powered Indian health insurance recommendation system.
+        </p>
+
+    </div>
+
+    <div class="right">
+
+        <div class="form-box">
+
+            <h2 class="mb-4 text-center">
+                Login
+            </h2>
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <input type="email"
+                           class="form-control"
+                           name="email"
+                           placeholder="Enter Email"
+                           required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <input type="password"
+                           class="form-control"
+                           name="password"
+                           placeholder="Enter Password"
+                           required>
+
+                </div>
+
+                <button class="btn-login">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="/register">
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
